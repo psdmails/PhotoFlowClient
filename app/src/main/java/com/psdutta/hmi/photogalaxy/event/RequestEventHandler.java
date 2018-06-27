@@ -37,13 +37,13 @@ class RequestEventHandler {
     private List<byte[]> getDataForRequest(ReceivedPacket packet) {
         if (packet.getRequestType().equals(Constants.ALL)) {
             List<SendPacket> thumbNailList = BitmapGenerator.getAllThumbnail();
-            // Group of 5 thumbnails
+            // Group of 4 thumbnails
             int processedIndex = 0;
             List<byte[]> listTosend = new ArrayList<>();
             while (processedIndex < thumbNailList.size()) {
                 int length = thumbNailList.size() - processedIndex;
-                if (length > 5) {
-                    length = 5;
+                if (length > 4) {
+                    length = 4;
                 }
                 List<SendPacket> packetPart = thumbNailList.subList(processedIndex,
                         processedIndex+length);

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BitmapGenerator {
-    private static final int THUMBNAIL_SIZE = 64;
+    private static final int THUMBNAIL_SIZE = 128;
     private static final String TAG = BitmapGenerator.class.getSimpleName();
 
     public static List<SendPacket> getAllThumbnail() {
@@ -52,12 +52,12 @@ public class BitmapGenerator {
         float width = bitmap.getWidth();
         float height = bitmap.getHeight();
         Float ratio = width / height;
-        bitmap = Bitmap.createScaledBitmap(bitmap, (int) (5*THUMBNAIL_SIZE * ratio),
-                5*THUMBNAIL_SIZE, false);
+        bitmap = Bitmap.createScaledBitmap(bitmap, (int) (4*THUMBNAIL_SIZE * ratio),
+                4*THUMBNAIL_SIZE, false);
         String encodedString = bitmapToString(bitmap);
         Log.i(TAG, "Encoded bit map " + encodedString);
         bitmap.recycle();
-        return new SendPacket(base64Encode(filePath), encodedString);
+        return new SendPacket(filePath, encodedString);
     }
 
     public static byte[] bitmapToByte(Bitmap bitmap) {

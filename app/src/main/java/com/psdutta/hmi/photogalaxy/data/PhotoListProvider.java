@@ -12,6 +12,7 @@ import java.util.List;
 class PhotoListProvider {
     private static final String CAMERA_IMAGE_BUCKET_NAME = Environment.getExternalStorageDirectory().toString() + "/DCIM/Camera";
     private static final String CAMERA_IMAGE_BUCKET_ID = getBucketId(CAMERA_IMAGE_BUCKET_NAME);
+    private static final int MAX_DATA = 30;
 
     private static String getBucketId(String path) {
         return String.valueOf(path.toLowerCase().hashCode());
@@ -25,15 +26,27 @@ class PhotoListProvider {
                 projection,
                 selection,
                 selectionArgs,
-                null);
+                MediaStore.Images.Media.DATE_TAKEN + " DESC");
         List<String> result = null;
         if (cursor != null) {
-            result = new ArrayList<>(cursor.getCount());
+            int n = cursor.getCount();
+
+            if(n>MAX_DATA) {
+                n = MAX_DATA;
+            }
+            int i = 0;
+            result = new ArrayList<>(n);
             if (cursor.moveToFirst()) {
                 final int dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
                 do {
                     final String data = cursor.getString(dataColumn);
                     result.add(data);
+                    i++;
+
+                    if(i==n) {
+                        break;
+                    }
                 } while (cursor.moveToNext());
             }
             cursor.close();

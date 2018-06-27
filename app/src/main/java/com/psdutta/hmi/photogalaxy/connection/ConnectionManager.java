@@ -5,8 +5,8 @@ import com.psdutta.hmi.photogalaxy.queue.PacketQueueManager;
 
 public class ConnectionManager{
     private static final int SERVER_LISTENING_PORT = 2323;
-    //private static final String SERVER_IP_ADDRESS = "192.168.5.1"; /*for HU*/
-    private static final String SERVER_IP_ADDRESS = "192.168.43.1"; /*for mobiles*/
+    private static final String SERVER_IP_ADDRESS = "192.168.5.1"; /*for HU*/
+    //private static final String SERVER_IP_ADDRESS = "192.168.43.1"; /*for mobiles*/
     private static final int CLIENT_PORT = 1313;
     private static final String TAG = ConnectionManager.class.getSimpleName();
     private PacketQueueManager mPacketQueueManager;
